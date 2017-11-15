@@ -1,0 +1,25 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+@model FliereFluiter.WebUI.Models.addNewGuestViewModel
+@{
+    ViewBag.Title = "guestaddedstaus";
+}
+
+<h2>addNewGuest</h2>
+
+hi, the guest has been added with the following parameters
+
+@{
+    var g = Model.guest;
+
+    <h3>@g.Id - @g.Name</h3>
+        <p>
+            @g.Adress <br />
+        Birthdate: @g.Birthday <br />
+        City:@g.City <br />
+        Mob: @g.Mobnumber <br />
+        Tel:@g.Telnumber <br />
+        Social: @g.Socialnumber <br />
+        Card: @g.Socialcard<br />
+        PostalCode: @g.Postalcode <br />
+        </p>
+}

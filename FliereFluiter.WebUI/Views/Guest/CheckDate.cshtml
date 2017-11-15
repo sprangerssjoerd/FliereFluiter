@@ -1,0 +1,49 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.CheckDateViewModel
+@{
+    ViewBag.Title = "CheckDate";
+}
+
+<h2>CheckDate</h2>
+Bezetting voor periode van 
+@Html.DisplayFor(beginDate => Model.beginDate)
+tot 
+@Html.DisplayFor(endDate => Model.endDate)
+op veld 
+@Html.DisplayFor(fieldName => Model.campingField.Name)
+
+<br />
+
+@for (int i = 0; i < Model.placeavailability.Count; i++)
+{
+    <div>
+        Beschikbaarheid voor <br />
+
+        @Html.DisplayFor(model => model.placeNameAv[i], "placename")<br />
+        Deze plaats is
+        @if (Model.placeBoolAv[i].ToString().Equals(false.ToString()))
+        {
+            @Html.Label("vrij")
+        }
+        else
+        {
+            @Html.Label("bezet")
+        }
+
+        @if (Model.placeBoolAv[i].Equals(false))
+        {
+
+            using (Html.BeginForm("ReservationGuestDetails", "Guest", new { }, FormMethod.Post, new { @class = "form_html" }))
+            {
+                @Html.HiddenFor(model => model.placeId, new { Name = "placeId", Value = Model.placeIdAv[i]})
+                @Html.HiddenFor(model => model.beginDate, "beginDate")
+                @Html.HiddenFor(model => model.endDate, "endDate")
+        <input type="submit" value="Reserveer" />
+            }
+
+        }
+
+        <br/><br />
+    </div>
+}

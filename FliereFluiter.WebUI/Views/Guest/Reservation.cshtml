@@ -1,0 +1,76 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+@model FliereFluiter.WebUI.Models.ReservationViewModel
+
+@{
+    ViewBag.Title = "Reservation";
+}
+
+<h2>Reservation</h2>
+
+In welke gewenste periode zou u van de onze mooi plekken willen genieten.
+
+
+@using (Html.BeginForm("CheckDate", "Guest", new {}, FormMethod.Post, new { @class = "form_html" }))
+{
+    <p>
+        vul hier uw gewenste aankomst datum
+        @Html.EditorFor(model => model.beginDate, "beginDate")
+    </p>
+
+        <p>
+            vul hier uw gewenste vertrek datum
+            @Html.EditorFor(model => model.endDate, "endDate")
+        </p>
+
+        <p>
+            Vul hier in het gewenste veld in
+            @Html.EditorFor(model => model.fieldId, "fieldId")
+        </p>
+
+        <input type="submit" value="Beschikbaarheid opvragen" />
+}
+@*
+<div>
+Vul hier uw gebruiker gegevens in
+@using (Html.BeginForm("addnewGuest", "main", new { Id = "addGuest_form_html_homePage" }, FormMethod.Post, new { @class = "form_html" }))
+{
+    <p>
+        uw gebruikersnaam:
+        @Html.EditorFor(model => model.guest.Name, "name")
+    </p>
+        <p>
+            uw adress:
+            @Html.EditorFor(model => model.guest.Adress, "adress")
+        </p>
+        <p>
+            uw postalcode:
+            @Html.EditorFor(model => model.guest.Postalcode, "postalcode")
+        </p>
+        <p>
+            uw city:
+            @Html.EditorFor(model => model.guest.City, "city")
+        </p>
+        <p>
+            uw telnumber:
+            @Html.EditorFor(model => model.guest.Telnumber, "telnumber")
+        </p>
+        <p>
+            uw birthday:
+            @Html.EditorFor(model => model.birthday, "birthday")
+        </p>
+        <p>
+            uw mobnumber:
+            @Html.EditorFor(model => model.guest.Mobnumber, "mobnumber")
+        </p>
+        <p>
+            uw socialnumber:
+            @Html.EditorFor(model => model.guest.Socialnumber, "socialnumber")
+        </p>
+        <p>
+            uw socialcard:
+            @Html.EditorFor(model => model.guest.Socialcard, "socialcard")
+        </p>
+        <input type="submit" value="gast toevoegen" />
+}
+</div>
+*@
