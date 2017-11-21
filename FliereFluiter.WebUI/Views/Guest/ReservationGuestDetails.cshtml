@@ -9,7 +9,7 @@
 
 <div>
     Vul hier uw gebruiker gegevens in
-    @using (Html.BeginForm("addnewGuest", "main", new { Id = "addGuest_form_html_homePage" }, FormMethod.Post, new { @class = "form_html" }))
+    @using (Html.BeginForm("addNewGuestReservation", "guest", new { Id = "addGuest_form_html_homePage" }, FormMethod.Post, new { @class = "form_html" }))
     {
         <p>
             uw gebruikersnaam:
@@ -47,6 +47,10 @@
             uw socialcard:
             @Html.EditorFor(model => model.guest.Socialcard, "socialcard")
         </p>
+
+        @Html.HiddenFor(model => model.campingPlace, "campingPlace")
+        @Html.HiddenFor(model => model.beginDate, "beginDate")
+        @Html.HiddenFor(model => model.endDate, "endDate")
         <input type="submit" value="gast toevoegen" />
     }
 </div>

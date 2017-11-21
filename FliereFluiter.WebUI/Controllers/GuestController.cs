@@ -21,12 +21,16 @@ namespace FliereFluiter.WebUI.Controllers
         private IGuestRepository _guestRepository;
         private ICampingFieldRepository _fieldRepository;
         private ICampingPlaceRepository _placeRepository;
+        private IPlaceReservationRepository _placeReservationRepository;
+        private IPlaceReservationCampingPlaceRepository _placeReservationCampingPlaceRepository;
 
-        public GuestController(IGuestRepository guestRepository, ICampingFieldRepository fieldRepository, ICampingPlaceRepository placeRepository)
+        public GuestController(IGuestRepository guestRepository, ICampingFieldRepository fieldRepository, ICampingPlaceRepository placeRepository, IPlaceReservationRepository placeReservationRepository, IPlaceReservationCampingPlaceRepository placeReservationCampingPlaceRepository)
         {
             this._guestRepository = guestRepository;
             this._fieldRepository = fieldRepository;
             _placeRepository = placeRepository;
+            _placeReservationRepository = placeReservationRepository;
+            _placeReservationCampingPlaceRepository = placeReservationCampingPlaceRepository;
         }
 
         [HttpGet]
@@ -99,6 +103,35 @@ namespace FliereFluiter.WebUI.Controllers
                 guest = newGuest
             };
             return View(model);
+        }
+
+       [HttpPost]
+       public ActionResult addnewGuestReservation(Guest guest, CampingPlace campingPlace, DateTime beginDate, DateTime endDate)
+        {
+            PlaceReservation placeRes = new PlaceReservation();
+            PlaceReservationCampingPlace prcp = new PlaceReservationCampingPlace();
+            placeRes.GuestId = guest.Id;
+            placeRes.GuestAmount = 0;
+            placeRes.ChildrenAmount = 0;
+            placeRes.Discount = false;
+
+            var newGuest = _guestRepository.addGuest(guest);
+            var newPlaceReservation = _placeReservationRepository.addPlaceReservation(placeRes);
+
+            prcp.PlaceReservationId = newPlaceReservation.PlaceReservationId;
+            prcp.CampingPlaceId = campingPlace.CampingPlaceId;
+            prcp.PeriodBegin = beginDate;
+            prcp.PeriodEnd = endDate;
+
+            var newPlaceReservationCampingPlace = _placeReservationCampingPlaceRepository.addPRCP(prcp);
+
+            SuccesFullReservationViewModel model = new SuccesFullReservationViewModel
+            {
+                guest = newGuest,
+                placeReservation = newPlaceReservation,
+                placeReservationCampingPlace = newPlaceReservationCampingPlace
+            };
+            return View();
         }
 
 

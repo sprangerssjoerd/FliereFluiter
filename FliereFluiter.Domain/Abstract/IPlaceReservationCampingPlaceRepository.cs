@@ -10,5 +10,6 @@ namespace FliereFluiter.Domain.Abstract
     public interface IPlaceReservationCampingPlaceRepository
     {
         IEnumerable<PlaceReservationCampingPlace> PlaceReservationCampingPlaces { get; }
+        PlaceReservationCampingPlace addPRCP(PlaceReservationCampingPlace prcp);
     }
 }
