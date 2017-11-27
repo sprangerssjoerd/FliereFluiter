@@ -1,0 +1,12 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.SuccesFullReservationViewModel
+@{
+    ViewBag.Title = "Succesfull reservation";
+}
+
+<h2>addnewGuestReservation</h2>
+
+you have succesfully made a new reservation on the name
+
+@Html.DisplayFor(model => model.guest.Name, "guestName")

@@ -23,5 +23,7 @@ namespace FliereFluiter.Domain.Concrete
         public DbSet<CampingField> CampingFields { get; set; }
         public DbSet<CampingPlace> CampingPlaces { get; set; }
         public DbSet<PlaceReservationCampingPlace> PlaceReservationCampingPlaces { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserInformation> UserInformations { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace FliereFluiter.WebUI.Models
         public CampingField campingField;
         public Guest guest;
         public CampingPlace campingPlace;
+        public int campingPlaceId;
 
         [DataType(DataType.Date)]
         public DateTime birthday { get; set; }

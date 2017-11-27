@@ -162,6 +162,7 @@
     <Content Include="Views\Main\addNewGuest.cshtml" />
     <Content Include="Views\Guest\Reservation.cshtml" />
     <Content Include="Views\Guest\ReservationGuestDetails.cshtml" />
+    <Content Include="Views\Guest\addnewGuestReservation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

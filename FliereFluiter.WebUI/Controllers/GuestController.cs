@@ -86,12 +86,12 @@ namespace FliereFluiter.WebUI.Controllers
             {
                 beginDate = beginDate,
                 endDate = endDate,
-                campingPlace = campingPlace
+                campingPlaceId = placeId
 
             };
             return View(model);
         }
-
+        /*
         [HttpPost]
         public ActionResult addNewGuest(Guest guest, DateTime birthday)
         {
@@ -103,23 +103,28 @@ namespace FliereFluiter.WebUI.Controllers
                 guest = newGuest
             };
             return View(model);
-        }
+        }*/
 
        [HttpPost]
-       public ActionResult addnewGuestReservation(Guest guest, CampingPlace campingPlace, DateTime beginDate, DateTime endDate)
+       public ActionResult addnewGuestReservation(Guest guest, DateTime birthday, int campingPlaceId, DateTime beginDate, DateTime endDate)
         {
+
+            guest.Birthday = birthday;
+            var newGuest = _guestRepository.addGuest(guest);
+
+
             PlaceReservation placeRes = new PlaceReservation();
-            PlaceReservationCampingPlace prcp = new PlaceReservationCampingPlace();
-            placeRes.GuestId = guest.Id;
+            placeRes.GuestId = newGuest.Id;
             placeRes.GuestAmount = 0;
             placeRes.ChildrenAmount = 0;
             placeRes.Discount = false;
+            placeRes.DefReservation = false;
 
-            var newGuest = _guestRepository.addGuest(guest);
             var newPlaceReservation = _placeReservationRepository.addPlaceReservation(placeRes);
 
+            PlaceReservationCampingPlace prcp = new PlaceReservationCampingPlace();
             prcp.PlaceReservationId = newPlaceReservation.PlaceReservationId;
-            prcp.CampingPlaceId = campingPlace.CampingPlaceId;
+            prcp.CampingPlaceId = campingPlaceId;
             prcp.PeriodBegin = beginDate;
             prcp.PeriodEnd = endDate;
 
@@ -131,7 +136,7 @@ namespace FliereFluiter.WebUI.Controllers
                 placeReservation = newPlaceReservation,
                 placeReservationCampingPlace = newPlaceReservationCampingPlace
             };
-            return View();
+            return View(model);
         }
 
 

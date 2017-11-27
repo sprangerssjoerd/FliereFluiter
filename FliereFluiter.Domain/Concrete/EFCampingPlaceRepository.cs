@@ -26,7 +26,7 @@ namespace FliereFluiter.Domain.Concrete
         {
             try
             {
-                var campingPlace = context.CampingPlaces.Single(c => c.CampingPlaceId == CampingPlaceId);
+                var campingPlace = context.CampingPlaces.Single(c => c.CampingPlaceId.Equals(CampingPlaceId));
                 return campingPlace;
             }
             catch(Exception ex)

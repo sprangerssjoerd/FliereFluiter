@@ -22,6 +22,7 @@ namespace FliereFluiter.Domain.Entities
         public int GuestAmount { get; set; }
         public int ChildrenAmount { get; set; }
         public bool Discount { get; set; }
+        public bool DefReservation { get; set; }
 
         [ForeignKey("PlaceReservationId")]
         public virtual IEnumerable<PlaceReservationFellowGuest> PlaceReservationFellowGuests { get; set; }

@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ILoginRepository.cs" />
     <Compile Include="Abstract\IPlaceReservationCampingPlaceRepository.cs" />
     <Compile Include="Abstract\ICampingPlaceRepository.cs" />
     <Compile Include="Abstract\IFacilityRepository.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Concrete\EFFacilityRepository.cs" />
     <Compile Include="Concrete\EFFacilityReservationRepository.cs" />
     <Compile Include="Concrete\EFFellowGuestRepository.cs" />
+    <Compile Include="Concrete\EFLoginRepository.cs" />
     <Compile Include="Concrete\EFPlacereservationFellowGuestRepository - Copy.cs" />
     <Compile Include="Concrete\EFPlacereservationCampingPlaceRepository.cs" />
     <Compile Include="Concrete\EFGuestRepository.cs" />
@@ -104,6 +106,8 @@
     <Compile Include="Concrete\EFSeasonDateRepository.cs" />
     <Compile Include="Concrete\EFSeasonRepository.cs" />
     <Compile Include="Concrete\EFPlaceReservationRepository.cs" />
+    <Compile Include="Entities\Login\Role.cs" />
+    <Compile Include="Entities\Login\UserInformation.cs" />
     <Compile Include="Entities\PlaceReservationCampingPlace.cs" />
     <Compile Include="Entities\CampingField.cs" />
     <Compile Include="Entities\Facility.cs" />
@@ -136,6 +140,18 @@
     <Compile Include="Migrations\201710090834135_typeforcampingfield.Designer.cs">
       <DependentUpon>201710090834135_typeforcampingfield.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711271359323_defreservationadded.cs" />
+    <Compile Include="Migrations\201711271359323_defreservationadded.Designer.cs">
+      <DependentUpon>201711271359323_defreservationadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711271547045_logintables.cs" />
+    <Compile Include="Migrations\201711271547045_logintables.Designer.cs">
+      <DependentUpon>201711271547045_logintables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711271554118_logintables1.cs" />
+    <Compile Include="Migrations\201711271554118_logintables1.Designer.cs">
+      <DependentUpon>201711271554118_logintables1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -162,6 +178,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710090834135_typeforcampingfield.resx">
       <DependentUpon>201710090834135_typeforcampingfield.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271359323_defreservationadded.resx">
+      <DependentUpon>201711271359323_defreservationadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271547045_logintables.resx">
+      <DependentUpon>201711271547045_logintables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271554118_logintables1.resx">
+      <DependentUpon>201711271554118_logintables1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

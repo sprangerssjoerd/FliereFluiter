@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using System.Data;
+@using System.Configuration;
+@using System.Data.SqlClient;
+@using System.Web.Security;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,6 +14,11 @@
 <body>
     <div class="navbar">
         <a class="navbar-brand" href="#"> FLIEREFLUITER</a>
+
+        <form id="form1" runat="server">
+            <asp:Login ID="Login1" runat="server" OnAuthenticate="ValidateUser"></asp:Login>
+        </form>
+
     </div>
     <div>
         @RenderBody()
