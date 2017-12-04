@@ -11,5 +11,8 @@ namespace FliereFluiter.Domain.Abstract
     {
         IEnumerable<Role> Roles { get; }
         IEnumerable<UserInformation> UserInformations { get; }
+
+        bool ValidateLogin(UserInformation user, string Password);
+        UserInformation GetUserInformation(string Name);
     }
 }

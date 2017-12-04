@@ -21,6 +21,16 @@
 
     </div>
     <div>
+        @if (HttpContext.Current.Session["UserId"] == null)
+        {
+           @Html.ActionLink("Log in", "Login", "Login");
+        }
+        else
+        {
+            @:Hallo @HttpContext.Current.Session["UserName"].ToString()
+            @Html.ActionLink("log uit", "Logout", "login");
+        }
+
         @RenderBody()
     </div>
 </body>

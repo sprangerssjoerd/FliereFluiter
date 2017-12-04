@@ -1,0 +1,28 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using(Html.BeginForm("Login", "Login", new object { }, FormMethod.Post, new { @class = "login-form" }))
+{
+    if (Model.UserNamePass == false)
+    {
+        @:Uw gebruikersnaam is niet bekend
+        <br />
+        }
+    @:uw gebruikersnaam: <br />
+    @Html.TextBox("name"); <br />
+
+    if (Model.UserNamePass == true && Model.PasswordPass == false)
+    {
+        @:Uw wachtwoord komt niet overeen met de gebruikte gebruikernaam
+        <br />
+    }
+    @:Uw Wachtwoord: <br />
+    @Html.Password("password");<br />
+<input type="submit" value="log in" />
+}

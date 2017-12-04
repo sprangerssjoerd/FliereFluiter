@@ -48,6 +48,7 @@ namespace FliereFluiter.WebUI.Infrastructure
             kernel.Bind<IPlaceReservationFellowGuestRepository>().To<EFPlaceReservationFellowGuestRepository>();
             kernel.Bind<ISeasonDateRepository>().To<EFSeasonDateRepository>();
             kernel.Bind<ISeasonRepository>().To<EFSeasonRepository>();
+            kernel.Bind<ILoginRepository>().To<EFLoginRepository>();
 
             //First mock to test bindings
             //Mock<IGuestRepository> mock = new Mock<IGuestRepository>();
