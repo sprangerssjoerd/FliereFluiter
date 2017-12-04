@@ -11,6 +11,7 @@ namespace FliereFluiter.Domain.Abstract
     {
         IEnumerable<Guest> Guests { get; }
         Guest addGuest(Guest guest);
+        Guest getGuestByGuestId(int guestId);
     }
 
 }

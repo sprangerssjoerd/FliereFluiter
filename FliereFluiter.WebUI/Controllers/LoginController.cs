@@ -49,12 +49,14 @@ namespace FliereFluiter.WebUI.Controllers
                     Session["UserName"] = user.UserName;
                     Session["UserId"] = user.UserId;
                     Session["UserRole"] = user.Role.RoleId;
+                    Session["Rolelvl"] = user.Role.roleLvl;
 
                     LoginViewModel model = new LoginViewModel
                     {
                         UserId = (int)(Session["UserId"]),
                         UserName = (string)(Session["UserName"]),
-                        UserRole = (string)(Session["RoleId"])
+                        UserRole = (string)(Session["RoleId"]),
+                        RoleLvl = (int)(Session["RoleLvl"])
                     };
                     return View("LoginSuccesFull", model);
                 }
@@ -82,6 +84,7 @@ namespace FliereFluiter.WebUI.Controllers
             Session["UserName"] = null;
             Session["UserId"] = null;
             Session["UserRole"] = null;
+            Session["RoleLvl"] = null;
 
             LoginViewModel model = new LoginViewModel
             {

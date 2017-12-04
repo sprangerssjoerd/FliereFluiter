@@ -34,5 +34,18 @@ namespace FliereFluiter.Domain.Concrete
 
         }
 
+        public Guest getGuestByGuestId(int guestId)
+        {
+            try
+            {
+                Guest guest = context.Guests.Single(m => m.Id.Equals(guestId));
+                return guest;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("ID not Found", ex);
+            }
+        }
+
     }
 }

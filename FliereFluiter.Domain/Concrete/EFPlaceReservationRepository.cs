@@ -33,5 +33,17 @@ namespace FliereFluiter.Domain.Concrete
             return placeReservation;
 
         }
+        public PlaceReservation getPlaceReservationById(int placeReservationId)
+        {
+            PlaceReservation placeReservation = context.PlaceReservations.Single(m => m.PlaceReservationId.Equals(placeReservationId));
+            return placeReservation;
+        }
+
+
+        public IEnumerable<PlaceReservation> getPlaceReservationsWhereDefIsFalse()
+        {
+            IEnumerable<PlaceReservation> placeReservations = context.PlaceReservations.Where(m => m.DefReservation.Equals(!true));
+            return placeReservations;
+        }
     }
 }
