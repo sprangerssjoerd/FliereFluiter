@@ -48,15 +48,15 @@ namespace FliereFluiter.WebUI.Controllers
                 {
                     Session["UserName"] = user.UserName;
                     Session["UserId"] = user.UserId;
-                    Session["UserRole"] = user.Role.RoleId;
-                    Session["Rolelvl"] = user.Role.roleLvl;
+                    Session["UserRole"] = user.RoleId;
+                    Session["Rolelvl"] = user.Role.RoleLvl;
 
                     LoginViewModel model = new LoginViewModel
                     {
                         UserId = (int)(Session["UserId"]),
                         UserName = (string)(Session["UserName"]),
                         UserRole = (string)(Session["RoleId"]),
-                        RoleLvl = (int)(Session["RoleLvl"])
+                        RoleLvl = (int)(Session["Rolelvl"])
                     };
                     return View("LoginSuccesFull", model);
                 }
@@ -91,6 +91,36 @@ namespace FliereFluiter.WebUI.Controllers
 
             };
             return View("Logout", model);
+        }
+
+        public ActionResult NotLoggedin()
+        {
+            Session["UserName"] = null;
+            Session["UserId"] = null;
+            Session["UserRole"] = null;
+            Session["RoleLvl"] = null;
+
+            LoginViewModel model = new LoginViewModel
+            {
+
+            };
+            return View("Logout", model);
+        }
+
+        public void checkRoleLvl(int ReqLvl)
+        {
+            try
+            {
+                int sessionInfo = (int)(Session["Rolelvl"]);
+                if (sessionInfo < ReqLvl)
+                {
+                    throw new Exception("notloggedin");
+                }
+            }
+            catch (Exception ex)
+            {
+                RedirectToAction("NotLoggedin", "login");
+            }
         }
     }
 }

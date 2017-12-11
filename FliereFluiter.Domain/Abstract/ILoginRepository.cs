@@ -14,5 +14,7 @@ namespace FliereFluiter.Domain.Abstract
 
         bool ValidateLogin(UserInformation user, string Password);
         UserInformation GetUserInformation(string Name);
+
+        Role GetRoleById(int roleId);
     }
 }

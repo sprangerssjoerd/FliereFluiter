@@ -13,6 +13,7 @@ namespace FliereFluiter.Domain.Abstract
         PlaceReservation addPlaceReservation(PlaceReservation placeReservation);
         PlaceReservation getPlaceReservationById(int placeReservationId);
         IEnumerable<PlaceReservation> getPlaceReservationsWhereDefIsFalse();
+        void setDefRes(PlaceReservation placeRes);
     }
 
     

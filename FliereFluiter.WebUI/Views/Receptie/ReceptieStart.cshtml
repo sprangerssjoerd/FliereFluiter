@@ -5,11 +5,19 @@
     ViewBag.Title = "ReceptieStart";
 }
 
+
 <h2>ReceptieStart</h2>
 @foreach(var p in Model.placeReservations)
 {
     @p.PlaceReservationId @:, @p.Guest.Name
     @Html.ActionLink("bevestig reservering", "confirmReservation", "Receptie",new { PlaceReservationId = p.PlaceReservationId}, null)
     <br />
+    
 }
+<br /><br />
+View all Reservations @Html.ActionLink("hier", "viewReservations", "Receptie")
+
+
+
+
 

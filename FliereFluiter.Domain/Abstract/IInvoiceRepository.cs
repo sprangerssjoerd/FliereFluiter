@@ -10,5 +10,6 @@ namespace FliereFluiter.Domain.Abstract
     public interface IInvoiceRepository
     {
         IEnumerable<Invoice> Invoices { get; }
+        Invoice getInvoicesByPlaceReservationId(int PRId);
     }
 }

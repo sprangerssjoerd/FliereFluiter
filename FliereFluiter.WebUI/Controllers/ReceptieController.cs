@@ -17,55 +17,72 @@ namespace FliereFluiter.WebUI.Controllers
     public class ReceptieController : Controller
     {
         // GET: Receptie
+        private LoginController _loginController;
         private IPlaceReservationRepository _placeReservationRepository;
         private IGuestRepository _guestRepository;
-        public ReceptieController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository)
+        private IInvoiceRepository _invoiceRepository;
+        public ReceptieController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository)
         {
             _placeReservationRepository = placeReservationRepository;
             _guestRepository = guestRepository;
+            _loginController = loginController;
+            _invoiceRepository = inVoiceRepository;
         }
 
         [HttpGet]
         public ActionResult ReceptieStart()
         {
-            if ((int)(Session["RoleLvl"]) >= 200)
-            {
-                var reservations = _placeReservationRepository.getPlaceReservationsWhereDefIsFalse();
-                foreach (var p in reservations)
-                {
-                    p.Guest = _guestRepository.getGuestByGuestId(p.GuestId);
-                }
+            _loginController.checkRoleLvl(200);
 
-                ReceptieViewModel model = new ReceptieViewModel
-                {
-                    placeReservations = reservations
-                };
-                return View(model);
-            }
-            else
+            var reservations = _placeReservationRepository.getPlaceReservationsWhereDefIsFalse();
+            foreach (var p in reservations)
             {
-                return View("~/Views/Login/NotLoggedin.cshtml");
+                p.Guest = _guestRepository.getGuestByGuestId(p.GuestId);
             }
+
+            ReceptieViewModel model = new ReceptieViewModel
+            {
+                placeReservations = reservations
+            };
+            return View(model);
         }
 
         [HttpGet]
-        public ActionResult confirmReservation(int PlaceReservationId)
+        public string confirmReservation(int PlaceReservationId)
         {
-            if ((int)(Session["RoleLvl"]) >= 200)
+            _loginController.checkRoleLvl(200);
+
+            var placeReservation = _placeReservationRepository.getPlaceReservationById(PlaceReservationId);
+            placeReservation.Guest = _guestRepository.getGuestByGuestId(placeReservation.GuestId);
+            _placeReservationRepository.setDefRes(placeReservation);
+
+            string text = "succelvol reservering geaccepteerd";
+            return text;
+        }
+        public ViewResult viewReservations()
+        {
+            _loginController.checkRoleLvl(200);
+
+            var reservations = _placeReservationRepository.PlaceReservations;
+
+            ReceptieViewModel model = new ReceptieViewModel
             {
-                var placeReservation = _placeReservationRepository.getPlaceReservationById(PlaceReservationId);
-                placeReservation.Guest = _guestRepository.getGuestByGuestId(placeReservation.GuestId);
-                ReceptieViewModel model = new ReceptieViewModel
-                {
-                    placeReservation = placeReservation
-                };
-                return View(model);
-            }
-            else
-            {
-                return View("~/Views/Login/NotLoggedin.cshtml");
-            }
+                placeReservations = reservations
+            };
+            return View("ReservationView",model);
         }
 
+        public int getInvoiceByReservationId(int ResId)
+        {
+            Invoice invoice = _invoiceRepository.getInvoicesByPlaceReservationId(ResId);
+            int invoicePlaceResId = invoice.PlaceReservationId;
+            return invoicePlaceResId;
+        }
+
+        public ViewResult MakeInvoice()
+        {
+
+            return View("");
+        }
     }
 }

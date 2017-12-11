@@ -53,11 +53,25 @@ namespace FliereFluiter.Domain.Concrete
             try
             {
                 user = context.UserInformations.Single(u => u.UserName == Name);
+                user.Role = GetRoleById(user.RoleId);
                 return user;
             }
             catch(Exception ex)
             {
-                return user;
+                throw new Exception("UserName not found", ex);
+            }
+        }
+
+        public Role GetRoleById(int roleId)
+        {
+            Role role = null;
+            try
+            {
+                role = context.Roles.Single(r => r.RoleId == roleId);
+                return role;
+            }
+            catch(Exception ex)
+            {
                 throw new Exception("UserName not found", ex);
             }
         }

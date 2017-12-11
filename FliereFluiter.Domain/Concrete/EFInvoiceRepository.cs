@@ -16,5 +16,10 @@ namespace FliereFluiter.Domain.Concrete
         {
             get { return context.Invoices; }
         }
+
+        public Invoice getInvoicesByPlaceReservationId(int PRId)
+        {
+            return context.Invoices.Single(m => m.PlaceReservationId.Equals(PRId));
+        }
     }
 }

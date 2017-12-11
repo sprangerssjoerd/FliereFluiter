@@ -16,7 +16,7 @@ namespace FliereFluiter.Domain.Entities
         public int RoleId { get; set; }
 
         public string Name { get; set; }
-        public int roleLvl { get; set; }
+        public int RoleLvl { get; set; }
 
         [ForeignKey("RoleId")]
         public virtual IEnumerable<UserInformation> UserInformations { get; set; }

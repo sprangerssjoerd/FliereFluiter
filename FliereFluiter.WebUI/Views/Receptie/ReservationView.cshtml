@@ -1,0 +1,27 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.ReceptieViewModel
+
+@{
+    ViewBag.Title = "ReservationView";
+}
+
+@foreach (var p in Model.placeReservations)
+{
+    @p.PlaceReservationId @:, @p.Guest.Name
+    if (p.DefReservation.Equals(false))
+        {
+        @Html.ActionLink("bevestig reservering", "confirmReservation", "Receptie", new { PlaceReservationId = p.PlaceReservationId }, null)
+    }
+    if (p.PlaceReservationId.Equals(Html.Action("getInvoiceByReservationId", "receptie", new { ResId = p.PlaceReservationId })))
+    {
+        @:bekijk factuur
+    }
+    else
+    {
+        @:maak een nieuwe factuur aan
+    }
+
+    <br />
+
+}

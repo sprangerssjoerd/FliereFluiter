@@ -45,5 +45,11 @@ namespace FliereFluiter.Domain.Concrete
             IEnumerable<PlaceReservation> placeReservations = context.PlaceReservations.Where(m => m.DefReservation.Equals(!true));
             return placeReservations;
         }
+
+        public void setDefRes(PlaceReservation placeRes)
+        {
+            placeRes.DefReservation = true;
+            context.SaveChanges();
+        }
     }
 }
