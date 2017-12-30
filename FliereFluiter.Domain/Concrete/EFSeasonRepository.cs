@@ -16,5 +16,19 @@ namespace FliereFluiter.Domain.Concrete
         {
             get { return context.Seasons; }
         }
+
+        public Season getSeasonById(int Id)
+        {
+            try
+            {
+                Season season = context.Seasons.Single(m => m.SeasonID.Equals(Id));
+                return season;
+            }
+            catch(NullReferenceException e)
+            {
+                return null;
+            }
+
+        }
     }
 }

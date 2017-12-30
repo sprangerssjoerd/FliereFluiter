@@ -10,6 +10,7 @@ namespace FliereFluiter.Domain.Abstract
     public interface ISeasonDateRepository
     {
         IEnumerable<SeasonDate> SeasonDates { get; }
+        IEnumerable<SeasonDate> getRelevantSeasonDates(DateTime begin, DateTime end);
     }
 
 }

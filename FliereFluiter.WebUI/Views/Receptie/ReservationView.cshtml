@@ -5,10 +5,11 @@
 @{
     ViewBag.Title = "ReservationView";
 }
-
+<br /><br />
 @foreach (var p in Model.placeReservations)
 {
-    @p.PlaceReservationId @:, @p.Guest.Name
+    @p.PlaceReservationId;
+    //@p.Guest.Name;
     if (p.DefReservation.Equals(false))
         {
         @Html.ActionLink("bevestig reservering", "confirmReservation", "Receptie", new { PlaceReservationId = p.PlaceReservationId }, null)
@@ -20,6 +21,10 @@
     else
     {
         @:maak een nieuwe factuur aan
+        @Html.ActionLink("klik", "MakeInvoice", "receptie", new { ResId = p.PlaceReservationId }, null);
+        @: hier om een nieuwe factuur aan te maken
+
+        <br />
     }
 
     <br />

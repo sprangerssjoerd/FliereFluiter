@@ -10,6 +10,7 @@ namespace FliereFluiter.Domain.Abstract
     public interface ISeasonRepository
     {
         IEnumerable<Season> Seasons { get; }
+        Season getSeasonById(int id);
     }
 
 }

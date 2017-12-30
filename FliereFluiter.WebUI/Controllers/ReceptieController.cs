@@ -18,15 +18,25 @@ namespace FliereFluiter.WebUI.Controllers
     {
         // GET: Receptie
         private LoginController _loginController;
+        private PdfCreator _pdfCreator;
         private IPlaceReservationRepository _placeReservationRepository;
         private IGuestRepository _guestRepository;
         private IInvoiceRepository _invoiceRepository;
-        public ReceptieController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository)
+        private ISeasonDateRepository _seasonDateRepository;
+        private IPlaceReservationCampingPlaceRepository _placeReservationCampingPlaceRepository;
+        private ISeasonRepository _seasonRepository;
+        private ICampingPlaceRepository _campingPlaceRepository;
+        public ReceptieController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository, ISeasonDateRepository seasonDateRepository, IPlaceReservationCampingPlaceRepository placeReservationCampingPlaceRepository, ISeasonRepository seasonRepository, PdfCreator pdfCreator, ICampingPlaceRepository campingPlaceRepository)
         {
             _placeReservationRepository = placeReservationRepository;
             _guestRepository = guestRepository;
             _loginController = loginController;
             _invoiceRepository = inVoiceRepository;
+            _seasonDateRepository = seasonDateRepository;
+            _placeReservationCampingPlaceRepository = placeReservationCampingPlaceRepository;
+            _seasonRepository = seasonRepository;
+            _pdfCreator = pdfCreator;
+            _campingPlaceRepository = campingPlaceRepository;
         }
 
         [HttpGet]
@@ -74,15 +84,85 @@ namespace FliereFluiter.WebUI.Controllers
 
         public int getInvoiceByReservationId(int ResId)
         {
+            _loginController.checkRoleLvl(200);
+
             Invoice invoice = _invoiceRepository.getInvoicesByPlaceReservationId(ResId);
-            int invoicePlaceResId = invoice.PlaceReservationId;
+            int invoicePlaceResId = new int();
+            if (invoice == null)
+            {
+                invoicePlaceResId = 0;
+            }
+            else
+            {
+                invoicePlaceResId = invoice.PlaceReservationId;
+            }
             return invoicePlaceResId;
         }
 
-        public ViewResult MakeInvoice()
+        public ViewResult MakeInvoice(int ResId)
         {
+            _loginController.checkRoleLvl(200);
 
-            return View("");
+            IEnumerable<PlaceReservationCampingPlace> placeCamRes = _placeReservationCampingPlaceRepository.getReservationsPlaceByCampingPlaceId(ResId);
+            string factuurText = "Factuur" + ResId.ToString() + "\n";
+
+            foreach (var p in placeCamRes)
+            {
+                IEnumerable<SeasonDate> ESeason = _seasonDateRepository.getRelevantSeasonDates(p.PeriodBegin, p.PeriodEnd);
+
+                CampingPlace C = _campingPlaceRepository.getCampingPlaceById(p.CampingPlaceId);
+
+                foreach (var s in ESeason)
+                {
+                    var season = _seasonRepository.getSeasonById(s.SeasonId);
+                    s.Season = season;
+                    double bedrag = CalculatePriceForSeason(s.PeriodBegin, s.periodEnd, p.PeriodBegin, p.PeriodEnd, s.Season.Price);
+                    factuurText = factuurText + "Voor Camping plaats \n" + C.Name + "\n in de periode van " + p.PeriodBegin.ToString() + " tot " + p.PeriodEnd.ToString() + "wat in het " + s.Season.Name + " seizoen valt.\n voor een bedrag van: " + bedrag.ToString(); ;
+
+                }
+            }
+            _pdfCreator.AddLineToPDF(factuurText, ResId);
+
+            ReceptieViewModel model = new ReceptieViewModel
+            {
+
+            };
+
+            return View("MakeInvoice");
+        }
+
+        private double CalculatePriceForSeason(DateTime seasonBegin, DateTime seasonEnd, DateTime begin, DateTime end, double seasonPrice)
+        {
+            double bedrag;
+            //period is inside season
+            if (seasonBegin.Ticks < begin.Ticks && seasonEnd.Ticks > end.Ticks)
+            {
+                double days = (end - begin).TotalDays;
+                bedrag = days * seasonPrice;
+                return bedrag;
+            }
+            //period is outside season
+            else if (seasonBegin.Ticks > begin.Ticks && seasonEnd.Ticks < end.Ticks)
+            {
+                double days = (seasonEnd - seasonBegin).TotalDays;
+                bedrag = days * seasonPrice;
+                return bedrag;
+            }
+            //period begin is inside season but end is not
+            else if (seasonBegin.Ticks < begin.Ticks && seasonEnd.Ticks < end.Ticks)
+            {
+                double days = (seasonEnd - begin).TotalDays;
+                bedrag = days * seasonPrice;
+                return bedrag;
+            }
+            //period end is inside season but begin is not
+            else if(seasonBegin.Ticks > begin.Ticks && seasonEnd.Ticks > end.Ticks)
+            {
+                double days = (end - seasonBegin).TotalDays;
+                bedrag = days * seasonPrice;
+                return bedrag;
+            }
+            return bedrag = 0;
         }
     }
 }

@@ -16,5 +16,21 @@ namespace FliereFluiter.Domain.Concrete
         {
             get { return context.SeasonDates; }
         }
+
+        public IEnumerable<SeasonDate> getRelevantSeasonDates(DateTime begin, DateTime end)
+        {
+            IEnumerable<SeasonDate> seasonDates;
+
+            try
+            {
+                seasonDates = context.SeasonDates.Where(m => m.periodEnd > end && m.PeriodBegin < end);
+                return seasonDates;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("no dates have been found");
+                return null;
+            }
+        }
     }
 }

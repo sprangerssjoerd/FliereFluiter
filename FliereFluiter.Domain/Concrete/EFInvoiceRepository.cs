@@ -19,7 +19,16 @@ namespace FliereFluiter.Domain.Concrete
 
         public Invoice getInvoicesByPlaceReservationId(int PRId)
         {
-            return context.Invoices.Single(m => m.PlaceReservationId.Equals(PRId));
+            Invoice invoice = new Invoice();
+            try
+            {
+                invoice = context.Invoices.Single(m => m.PlaceReservationId.Equals(PRId));
+                return invoice;
+            }
+            catch
+            {
+                return invoice = null;
+            }
         }
     }
 }
