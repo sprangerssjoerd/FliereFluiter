@@ -1,0 +1,26 @@
+﻿
+@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.ManagerViewModel
+@{
+    ViewBag.Title = "ManagerStart";
+}
+
+<h2>ManagerStart</h2>
+
+
+<br />
+@Html.ActionLink("gastenlijst", "viewGuestList", "Manager")<br />
+
+** old method do not use **<br />
+@Html.ActionLink("zie bezettinggraad", "viewOccupancyRate", "Manager", new { id = 1, campingplaatsnaam = "K1" }, null)<br />
+** **<br />
+
+@foreach(var p in Model.idList)
+{
+    {
+        @:Id: @p <br />
+        @Html.ActionLink("Zie bettingsgraad", "viewOccupancyRate", "Manager", new { id = Model.idList.Single(m => m.Equals(p)) }, null)
+    }
+    <br />
+}

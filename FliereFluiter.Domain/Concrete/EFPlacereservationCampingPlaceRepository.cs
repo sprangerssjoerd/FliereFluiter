@@ -38,5 +38,24 @@ namespace FliereFluiter.Domain.Concrete
             return prcp;
 
         }
+
+        public IEnumerable<PlaceReservationCampingPlace> getPRCPByCampingPlaceId(int id)
+        {
+            IEnumerable<PlaceReservationCampingPlace> PRCPlist = context.PlaceReservationCampingPlaces.Where(m => m.CampingPlaceId.Equals(id)).OrderBy(m => m.PeriodBegin);
+            return PRCPlist;
+        }
+
+        public IEnumerable<PlaceReservationCampingPlace> getPRCPs()
+        {
+            IEnumerable<PlaceReservationCampingPlace> PRCPlist = context.PlaceReservationCampingPlaces;
+            return PRCPlist;
+        }
+
+        public IEnumerable<PlaceReservationCampingPlace> getPRCPByPlaceReservationId(int id)
+        {
+            IEnumerable<PlaceReservationCampingPlace> PRCPList = context.PlaceReservationCampingPlaces.Where(m => m.PlaceReservationId.Equals(id));
+            return PRCPList;
+        }
+
     }
 }

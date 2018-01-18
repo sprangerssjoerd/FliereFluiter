@@ -47,5 +47,18 @@ namespace FliereFluiter.Domain.Concrete
             }
         }
 
+        public IEnumerable<Guest> getAllGuests()
+        {
+            try
+            {
+                IEnumerable<Guest> guests = context.Guests;
+                return guests;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("No guests", ex);
+            }
+        }
+
     }
 }

@@ -1,0 +1,12 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.ManagerViewModel
+@{
+    ViewBag.Title = "View Guestlist";
+}
+<br />
+@foreach(var m in Model.guestList)
+{
+   @:GastId:  @m.Id GuestName: @m.Name  <br />
+   @Html.ActionLink("Alle boekingen", "viewAllGuestReservations", "Manager", new { guestId = m.Id }, null)<br />
+}

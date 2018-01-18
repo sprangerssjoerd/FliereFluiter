@@ -51,5 +51,11 @@ namespace FliereFluiter.Domain.Concrete
             placeRes.DefReservation = true;
             context.SaveChanges();
         }
+
+        public IEnumerable<PlaceReservation> getPlaceReservationByGuestId(int guestId)
+        {
+            IEnumerable<PlaceReservation> PRList = context.PlaceReservations.Where(m => m.GuestId.Equals(guestId));
+            return PRList;
+        }
     }
 }

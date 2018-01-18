@@ -1,0 +1,22 @@
+﻿
+
+@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.ManagerViewModel
+@{
+    ViewBag.Title = "View guestBookings";
+}
+<h2>guestBookings</h2>
+
+
+@if (Model.bookingStrings.Any())
+{
+    foreach (var p in Model.bookingStrings)
+    {
+        @p.ToString();<br />
+    }
+}
+else
+{
+    @: deze gast heeft nog geen boekingen
+}

@@ -185,6 +185,7 @@
     <Compile Include="Models\ViewModels\addNewGuestViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckDateViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\ManagerViewModel.cs" />
     <Compile Include="Models\ViewModels\ReceptieViewModel.cs" />
     <Compile Include="Models\ViewModels\ReservationViewModel.cs" />
     <Compile Include="Models\ViewModels\MainViewModel.cs" />
@@ -216,6 +217,10 @@
     <Content Include="Views\Login\NotLoggedin.cshtml" />
     <Content Include="Views\Receptie\ReservationView.cshtml" />
     <Content Include="Views\Receptie\MakeInvoice.cshtml" />
+    <Content Include="Views\Manager\BezettinggraadView.cshtml" />
+    <Content Include="Views\Manager\ManagerStart.cshtml" />
+    <Content Include="Views\Manager\guestList.cshtml" />
+    <Content Include="Views\Manager\guestBookings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -225,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Manager\" />
     <Folder Include="Views\Place\" />
   </ItemGroup>
   <ItemGroup>

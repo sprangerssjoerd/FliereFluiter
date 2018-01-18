@@ -30,21 +30,23 @@
             @:Hallo @HttpContext.Current.Session["UserName"].ToString()
             @Html.ActionLink("log uit", "Logout", "login");
 
-            if((int)HttpContext.Current.Session["RoleLvl"] >= 200)
-            {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart","Receptie")
-            }
-            if ((int)HttpContext.Current.Session["RoleLvl"] >= 500)
-            {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")
-                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")
-            }
             if ((int)HttpContext.Current.Session["RoleLvl"] >= 800)
             {
                 @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")
                 @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")
                 @Html.ActionLink("ManagerStart", "ManagerStart", "Manager")
             }
+            else if ((int)HttpContext.Current.Session["RoleLvl"] >= 500)
+            {
+                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")
+                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")
+            }
+            else  if ((int)HttpContext.Current.Session["RoleLvl"] >= 200)
+            {
+                @Html.ActionLink("ReceptieStart", "ReceptieStart","Receptie")
+            }
+
+
         }
 
         @RenderBody()

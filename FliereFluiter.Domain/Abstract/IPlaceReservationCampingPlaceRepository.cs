@@ -12,5 +12,8 @@ namespace FliereFluiter.Domain.Abstract
         IEnumerable<PlaceReservationCampingPlace> PlaceReservationCampingPlaces { get; }
         IEnumerable<PlaceReservationCampingPlace> getReservationsPlaceByCampingPlaceId(int PlaceId);
         PlaceReservationCampingPlace addPRCP(PlaceReservationCampingPlace prcp);
+        IEnumerable<PlaceReservationCampingPlace> getPRCPByCampingPlaceId(int id);
+        IEnumerable<PlaceReservationCampingPlace> getPRCPs();
+        IEnumerable<PlaceReservationCampingPlace> getPRCPByPlaceReservationId(int id);
     }
 }

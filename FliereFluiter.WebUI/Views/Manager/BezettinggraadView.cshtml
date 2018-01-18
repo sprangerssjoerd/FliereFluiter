@@ -1,0 +1,18 @@
+﻿@using FliereFluiter.WebUI.HtmlHelpers
+
+@model FliereFluiter.WebUI.Models.ManagerViewModel
+@{
+    ViewBag.Title = "BezettinggraadView";
+}
+
+<h2>BezettinggraadView</h2>
+
+@foreach(var p in Model.occupancyRate)
+{
+    @p;
+}
+
+
+
+
+
