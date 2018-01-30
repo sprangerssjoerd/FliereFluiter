@@ -1,0 +1,18 @@
+﻿@model FliereFluiter.WebUI.Models.BeheerViewModel
+@{
+    ViewBag.Title = "seasonProgramming";
+}
+
+<h2>seasonProgramming</h2>
+Alle seasoninfo: <br />
+
+@foreach (var p in Model.seasonInfoList)
+{
+    <ul>
+        <ul>name @p.name</ul>
+        <ul>begin datum : @p.beginDate</ul>
+        <ul>eind Datum : @p.endDate</ul> 
+        <ul>prijs : @p.price</ul>
+        <ul>@Html.ActionLink("wijzig","ChangeSeason", "beheer", new { seasonId = p.seasonId, seasonDateId = p.seasonDateId, name = p.name, beginDate = p.beginDate, endDate = p.endDate, price = p.price }, null)</ul>
+    </ul>
+}

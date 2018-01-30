@@ -15,6 +15,7 @@ namespace FliereFluiter.Domain.Abstract
         IEnumerable<PlaceReservation> getPlaceReservationsWhereDefIsFalse();
         void setDefRes(PlaceReservation placeRes);
         IEnumerable<PlaceReservation> getPlaceReservationByGuestId(int guestId);
+        void setDiscount(int Id);
     }
 
     

@@ -11,6 +11,9 @@ namespace FliereFluiter.Domain.Abstract
     {
         IEnumerable<SeasonDate> SeasonDates { get; }
         IEnumerable<SeasonDate> getRelevantSeasonDates(DateTime begin, DateTime end);
+        IEnumerable<SeasonDate> getSeasonDates();
+        SeasonDate getSeasonDateBySeasonId(int seasonId);
+        void UpdateSeasonDate(SeasonDate seasonDate);
     }
 
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FliereFluiter.Domain.Abstract;
 using FliereFluiter.Domain.Entities;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace FliereFluiter.Domain.Concrete
 {
@@ -29,6 +30,37 @@ namespace FliereFluiter.Domain.Concrete
                 return null;
             }
 
+        }
+
+        public IEnumerable<Season> getSeasons()
+        {
+            try
+            {
+                IEnumerable<Season> seasons = context.Seasons;
+                return seasons;
+            }
+            catch (NullReferenceException e)
+            {
+                return null;
+            }
+        }
+
+        public void UpdateSeason(Season season)
+        {
+            Season result = context.Seasons.Single(x => x.SeasonID.Equals(season.SeasonID));
+            if(result != null)
+            {
+                result.Name = season.Name;
+                result.Price = season.Price;
+            }
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (SqlException sqlex)
+            {
+                throw new Exception("season is not saved", sqlex);
+            }
         }
     }
 }

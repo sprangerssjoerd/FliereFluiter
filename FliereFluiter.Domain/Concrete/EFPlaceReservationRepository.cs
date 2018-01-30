@@ -57,5 +57,20 @@ namespace FliereFluiter.Domain.Concrete
             IEnumerable<PlaceReservation> PRList = context.PlaceReservations.Where(m => m.GuestId.Equals(guestId));
             return PRList;
         }
+
+        public void setDiscount(int Id)
+        {
+            var result = context.PlaceReservations.Single(m => m.PlaceReservationId.Equals(Id));
+            
+            if(result.Discount.Equals(false))
+            {
+                result.Discount = true;
+            }
+            else
+            {
+                result.Discount = false;
+            }
+            context.SaveChanges();
+        }
     }
 }

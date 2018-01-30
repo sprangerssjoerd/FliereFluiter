@@ -164,5 +164,13 @@ namespace FliereFluiter.WebUI.Controllers
             }
             return bedrag = 0;
         }
+
+        public void setDiscount(int id)
+        {
+            _loginController.checkRoleLvl(200);
+
+            _placeReservationRepository.setDiscount(id);
+            
+        }
     }
 }

@@ -124,6 +124,8 @@ namespace FliereFluiter.WebUI.Controllers
         [HttpGet]
         public ActionResult viewGuestList()
         {
+            _loginController.checkRoleLvl(900);
+
             IEnumerable<Guest> guestList = _guestRepository.getAllGuests();
             ManagerViewModel model = new ManagerViewModel
             {
@@ -135,6 +137,8 @@ namespace FliereFluiter.WebUI.Controllers
         [HttpGet]
         public ActionResult viewAllGuestReservations(int guestId)
         {
+            _loginController.checkRoleLvl(900);
+
             IEnumerable<PlaceReservation> PRList = _placeReservationRepository.getPlaceReservationByGuestId(guestId);
             List<PlaceReservationCampingPlace> PRCPList = new List<PlaceReservationCampingPlace>();
             List<string> stringResult = new List<string>();

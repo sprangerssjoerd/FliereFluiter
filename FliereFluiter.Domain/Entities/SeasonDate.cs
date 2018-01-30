@@ -17,8 +17,9 @@ namespace FliereFluiter.Domain.Entities
         public virtual Season Season { get; set; }
 
         public int SeasonId { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime PeriodBegin { get; set; }
+        [DataType(DataType.Date)]
         public DateTime periodEnd { get; set; }
     }
 }
