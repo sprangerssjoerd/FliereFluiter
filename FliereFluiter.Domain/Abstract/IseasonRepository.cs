@@ -13,6 +13,7 @@ namespace FliereFluiter.Domain.Abstract
         Season getSeasonById(int id);
         IEnumerable<Season> getSeasons();
         void UpdateSeason(Season season);
+        Season AddSeason(Season season);
     }
 
 }

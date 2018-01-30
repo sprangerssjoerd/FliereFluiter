@@ -72,5 +72,24 @@ namespace FliereFluiter.Domain.Concrete
             }
             context.SaveChanges();
         }
+
+        public void RemovePR(int id)
+        {
+            PlaceReservation itemToRemove = context.PlaceReservations.Single(x => x.PlaceReservationId.Equals(id));
+            if (itemToRemove != null)
+            {
+                context.PlaceReservations.Remove(itemToRemove);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("data you want to deleted does not exist");
+            }
+        }
+
+        public void UpdatePR(PlaceReservation pr)
+        {
+
+        }
     }
 }

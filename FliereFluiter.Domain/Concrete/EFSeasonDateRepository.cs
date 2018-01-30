@@ -79,5 +79,18 @@ namespace FliereFluiter.Domain.Concrete
                 throw new Exception("SeasonDate is not saved", sqlex);
             }
         }
+
+        public void AddSeasonDate(SeasonDate seasonDate)
+        {
+            context.SeasonDates.Add(seasonDate);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (SqlException sqlex)
+            {
+                throw new Exception("seasonDate is not saved", sqlex);
+            }
+        }
     }
 }

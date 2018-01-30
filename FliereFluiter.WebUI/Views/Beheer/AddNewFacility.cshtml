@@ -1,0 +1,15 @@
+﻿@model FliereFluiter.WebUI.Models.BeheerViewModel
+@{
+    ViewBag.Title = "AddNewFacility";
+}
+
+<h2>AddNewFacility</h2>
+
+@using (Html.BeginForm("AddNewFacilityPost", "Beheer", new { }, FormMethod.Post, new { @class = "form_html" }))
+{
+    @:Naam: @Html.TextBoxFor(m => m.facility.Name, "Name")<br />
+    @:prijs: @Html.EditorFor(m => m.facility.Price, "Price")<br />
+    @:beschrijving: @Html.EditorFor(m => m.facility.Description, "Description")<br />
+    @:Aantal: @Html.EditorFor(m => m.facility.Totalamount, "Totalamount")<br />
+    <input type="submit" value="voor wijzigen door" />
+}

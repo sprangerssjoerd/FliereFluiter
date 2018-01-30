@@ -208,6 +208,10 @@
     <Compile Include="Migrations\201712050103309_rolelvl3.Designer.cs">
       <DependentUpon>201712050103309_rolelvl3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801300104282_beheerstuk.cs" />
+    <Compile Include="Migrations\201801300104282_beheerstuk.Designer.cs">
+      <DependentUpon>201801300104282_beheerstuk.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712050103309_rolelvl3.resx">
       <DependentUpon>201712050103309_rolelvl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801300104282_beheerstuk.resx">
+      <DependentUpon>201801300104282_beheerstuk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

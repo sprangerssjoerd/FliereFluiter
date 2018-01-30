@@ -69,11 +69,22 @@ namespace FliereFluiter.WebUI.Controllers
             string text = "succelvol reservering geaccepteerd";
             return text;
         }
+
         public ViewResult viewReservations()
         {
             _loginController.checkRoleLvl(200);
 
             var reservations = _placeReservationRepository.PlaceReservations;
+            foreach(var res in reservations)
+            {
+                res.Guest = _guestRepository.getGuestByGuestId(res.GuestId);
+                res.PlaceReservationCampingPlaces = _placeReservationCampingPlaceRepository.getPRCPByPlaceReservationId(res.PlaceReservationId);
+                foreach (var place in res.PlaceReservationCampingPlaces)
+                {
+                    place.CampingPlace = _campingPlaceRepository.getCampingPlaceById(place.CampingPlaceId);
+                }
+
+            }
 
             ReceptieViewModel model = new ReceptieViewModel
             {
@@ -171,6 +182,40 @@ namespace FliereFluiter.WebUI.Controllers
 
             _placeReservationRepository.setDiscount(id);
             
+        }
+
+        public ActionResult RemoveReservation(int PlaceReservationId)
+        {
+            _placeReservationRepository.RemovePR(PlaceReservationId);
+
+            return RedirectToAction("viewReservations");
+        }
+        //to test tomorrow  difficult
+        public ViewResult UpdateReservation(int PlaceReservationId)
+        {
+            PlaceReservation pr = _placeReservationRepository.getPlaceReservationById(PlaceReservationId);
+
+            pr.PlaceReservationCampingPlaces = _placeReservationCampingPlaceRepository.getPRCPByPlaceReservationId(pr.PlaceReservationId);
+            IEnumerable<CampingPlace> campingPlaces = _campingPlaceRepository.CampingPlaces;
+            List<CampingPlace> campingPlaceList = new List<CampingPlace>();
+
+            foreach (var campingplace in campingPlaces)
+            {
+                campingPlaceList.Add(campingplace);
+            }
+
+
+            ReceptieViewModel model = new ReceptieViewModel
+            {
+                placeReservation = pr,
+                campingPlaceList = campingPlaceList
+            };
+            return View();
+        }
+
+        public void UpdateReservationPost(PlaceReservation pr)
+        {
+
         }
     }
 }

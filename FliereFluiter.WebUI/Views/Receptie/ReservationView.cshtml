@@ -8,25 +8,34 @@
 <br /><br />
 @foreach (var p in Model.placeReservations)
 {
-    @p.PlaceReservationId;
+    @p.PlaceReservationId; @: 
     //@p.Guest.Name;
-    if (p.DefReservation.Equals(false))
-        {
-        @Html.ActionLink("bevestig reservering", "confirmReservation", "Receptie", new { PlaceReservationId = p.PlaceReservationId }, null)
-    }
-    if (p.PlaceReservationId.Equals(Html.Action("getInvoiceByReservationId", "receptie", new { ResId = p.PlaceReservationId })))
+    @p.Guest.Name; @: :
+    <ul>
+    @foreach(var r in p.PlaceReservationCampingPlaces)
     {
-        @:bekijk factuur
+        <ul>
+            camping plaats: @r.CampingPlace.Name  van: @r.PeriodBegin tot: @r.PeriodEnd<br />
+        </ul>
+    }
+    </ul>
+    if (p.DefReservation.Equals(false))
+    {
+        @Html.ActionLink("bevestig reservering", "confirmReservation", "Receptie", new { PlaceReservationId = p.PlaceReservationId }, null)
     }
     else
     {
-        @:maak een nieuwe factuur aan
-        @Html.ActionLink("klik", "MakeInvoice", "receptie", new { ResId = p.PlaceReservationId }, null);
+        @: 
+        @Html.ActionLink("klik", "MakeInvoice", "Receptie", new { ResId = p.PlaceReservationId }, null);
         @: hier om een nieuwe factuur aan te maken
-
         <br />
+        @Html.ActionLink("wijzig reservering", "UpdateReservation", "Receptie", new { PlaceReservationId = p.PlaceReservationId }, null); @: 
+        @Html.ActionLink("verwijder reservering", "RemoveReservation", "Receptie", new { PlaceReservationId = p.PlaceReservationId }, null); @:
+        @Html.ActionLink("Geef korting", "setDiscount", "Receptie", new { id = p.PlaceReservationId }, null);
+        
     }
 
     <br />
+    <hr />
 
 }

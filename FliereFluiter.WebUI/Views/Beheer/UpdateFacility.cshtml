@@ -1,0 +1,15 @@
+﻿@model FliereFluiter.WebUI.Models.BeheerViewModel
+@{
+    ViewBag.Title = "UpdateFacility";
+}
+
+<h2>UpdateFacility</h2>
+@using (Html.BeginForm("UpdateFacilityPost", "Beheer", new { }, FormMethod.Post, new { @class = "form_html" }))
+{
+    @Html.HiddenFor(m => m.facility.FacilityId, new { FacilityId = Model.facility.FacilityId })
+    @:Naam: @Html.TextBoxFor(m => m.facility.Name, "Name", new { @Value = Model.facility.Name })<br />
+    @:prijs: @Html.EditorFor(m => m.facility.Price, "Price", new { @Value = Model.facility.Price })<br />
+    @:beschrijving: @Html.EditorFor(m => m.facility.Description, "Description", new { @Value = Model.facility.Description })<br />
+    @:Aantal: @Html.EditorFor(m => m.facility.Totalamount, "Totalamount", new { @Value = Model.facility.Totalamount })<br />
+    <input type="submit" value="voor wijzigen door" />
+}

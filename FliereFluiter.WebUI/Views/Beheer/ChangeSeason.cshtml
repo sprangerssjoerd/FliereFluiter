@@ -5,14 +5,14 @@
 
 <h2>ChangeSeason</h2>
 
-@using (Html.BeginForm("CheckDate", "Guest", new { }, FormMethod.Post, new { @class = "form_html" }))
+@using (Html.BeginForm("ChangeSeason", "Beheer", new { }, FormMethod.Post, new { @class = "form_html" }))
 {
-    @Html.HiddenFor(m => m.seasonInfo.seasonId, Model.seasonInfo.seasonId)
-    @Html.HiddenFor(m => m.seasonInfo.seasonDateId, Model.seasonInfo.seasonDateId)
-    @Html.TextBoxFor(m => m.seasonInfo.name, Model.seasonInfo.name, "name" )<br />
-    @Html.EditorFor(m => m.seasonInfo.beginDate, Model.seasonInfo.beginDate.ToString(), "beginDate")<br />
-    @Html.EditorFor(m => m.seasonInfo.endDate, Model.seasonInfo.endDate.ToString(), "endDate")<br />
-    @Html.EditorFor(m => m.seasonInfo.price, Model.seasonInfo.price.ToString(), "price")<br />
-    <input type="submit" value="voor weizigen door" />
+    @Html.HiddenFor(m => m.seasonInfo.seasonId, new { seasonId = Model.seasonInfo.seasonId })
+    @Html.HiddenFor(m => m.seasonInfo.seasonDateId, new { seasonDateId = Model.seasonInfo.seasonDateId })
+    @Html.TextBoxFor(m => m.seasonInfo.name, "name" , new { @Value = Model.seasonInfo.name})<br />
+    @Html.EditorFor(m => m.seasonInfo.beginDate, "beginDate", new { @Value = Model.seasonInfo.beginDate })<br />
+    @Html.EditorFor(m => m.seasonInfo.endDate, "endDate", new { @Value = Model.seasonInfo.endDate })<br />
+    @Html.EditorFor(m => m.seasonInfo.price, "price", new { @Value = Model.seasonInfo.price } )<br />
+    <input type="submit" value="voor wijzigen door" />
 }
 

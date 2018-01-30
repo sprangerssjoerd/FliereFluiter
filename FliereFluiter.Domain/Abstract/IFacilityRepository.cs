@@ -11,5 +11,8 @@ namespace FliereFluiter.Domain.Abstract
     public interface IFacilityRepository
     {
         IEnumerable<Facility> Facilities { get; }
+        void UpdateFacility(Facility facility);
+        void RemoveFacility(Facility facility);
+        void AddNewFacility(Facility facility);
     }
 }

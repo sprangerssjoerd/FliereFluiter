@@ -1,0 +1,18 @@
+﻿@model FliereFluiter.WebUI.Models.BeheerViewModel
+@{
+    ViewBag.Title = "FacilityView";
+}
+
+<h2>FacilityView</h2>
+
+@Html.ActionLink("Nieuwe Faciliteit  toevoegen", "AddNewFacility", "Beheer")<br /><br />
+
+@foreach(var p in Model.facilityList)
+{
+    @:Id: @p.FacilityId<br />
+    @:Naam: @p.Name<br />
+    @:Prijs: @p.Price<br />
+    @:Beschrijving: @p.Description<br />
+    @Html.ActionLink("Wijzig", "UpdateFacility", "Beheer", new { FacilityId = p.FacilityId, Name = p.Name, Totalamount = p.Totalamount, Description = p.Description, Price = p.Price }, null); <br />
+    @Html.ActionLink("Verwijder", "RemoveFacility", "Beheer", new { FacilityId = p.FacilityId, Name = p.Name, Totalamount = p.Totalamount, Description = p.Description, Price = p.Price }, null); <br /><br />
+}

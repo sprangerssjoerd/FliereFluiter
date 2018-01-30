@@ -7,6 +7,10 @@
 
 
 <h2>ReceptieStart</h2>
+
+View all Reservations @Html.ActionLink("hier", "viewReservations", "Receptie")
+<br /><br />
+
 @foreach(var p in Model.placeReservations)
 {
     @p.PlaceReservationId @:, @p.Guest.Name
@@ -14,8 +18,7 @@
     <br />
     
 }
-<br /><br />
-View all Reservations @Html.ActionLink("hier", "viewReservations", "Receptie")
+
 
 
 

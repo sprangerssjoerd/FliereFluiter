@@ -25,7 +25,9 @@ namespace FliereFluiter.WebUI.Controllers
         private IPlaceReservationCampingPlaceRepository _placeReservationCampingPlaceRepository;
         private ISeasonRepository _seasonRepository;
         private ICampingPlaceRepository _campingPlaceRepository;
-        public BeheerController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository, ISeasonDateRepository seasonDateRepository, IPlaceReservationCampingPlaceRepository placeReservationCampingPlaceRepository, ISeasonRepository seasonRepository, PdfCreator pdfCreator, ICampingPlaceRepository campingPlaceRepository)
+        private IFacilityRepository _facilityRepository;
+        private IFacilityReservationRepository _facilityReservartionRepository;
+        public BeheerController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository, ISeasonDateRepository seasonDateRepository, IPlaceReservationCampingPlaceRepository placeReservationCampingPlaceRepository, ISeasonRepository seasonRepository, PdfCreator pdfCreator, ICampingPlaceRepository campingPlaceRepository,IFacilityRepository facilityRepository, IFacilityReservationRepository facilityReservartionRepository)
         {
             _placeReservationRepository = placeReservationRepository;
             _guestRepository = guestRepository;
@@ -36,6 +38,9 @@ namespace FliereFluiter.WebUI.Controllers
             _seasonRepository = seasonRepository;
             _pdfCreator = pdfCreator;
             _campingPlaceRepository = campingPlaceRepository;
+            _facilityRepository = facilityRepository;
+            _facilityReservartionRepository = facilityReservartionRepository;
+
         }
 
 
@@ -81,9 +86,13 @@ namespace FliereFluiter.WebUI.Controllers
         [HttpGet]
         public ActionResult ChangeSeason(SeasonInfo seasonInfo)
         {
+            _loginController.checkRoleLvl(500);
+
             BeheerViewModel model = new BeheerViewModel
             {
                 seasonInfo = seasonInfo,
+                beginDate = seasonInfo.beginDate,
+                endDate = seasonInfo.endDate
             };
             return View("ChangeSeason", model);
         }
@@ -92,6 +101,9 @@ namespace FliereFluiter.WebUI.Controllers
         [ActionName("ChangeSeason")]
         public ActionResult ChangeSeasonPost(SeasonInfo seasonInfo)
         {
+
+            _loginController.checkRoleLvl(500);
+
             Season season = new Season
             {
                 Name = seasonInfo.name,
@@ -112,16 +124,105 @@ namespace FliereFluiter.WebUI.Controllers
 
             BeheerViewModel model = new BeheerViewModel
             {
-                seasonInfo = seasonInfo
+                seasonInfo = seasonInfo,
+                
             };
             return View("ChangeSeason", model);
         }
 
-        public ActionResult facilityManagement()
+        [HttpGet]
+        public ActionResult AddNewSeason()
+        {
+            _loginController.checkRoleLvl(500);
+            return View("addNewSeason");
+        }
+
+        [HttpPost]
+        public void AddNewSeasonPost(string name, DateTime beginDate, DateTime endDate, double price)
+        {
+
+            _loginController.checkRoleLvl(500);
+
+            Season season = new Season
+            {
+                Name = name,
+                Price = price
+            };
+
+            Season result = _seasonRepository.AddSeason(season);
+
+            SeasonDate seasonDate = new SeasonDate
+            {
+                SeasonId = result.SeasonID,
+                PeriodBegin = beginDate,
+                periodEnd = endDate
+            };
+
+            _seasonDateRepository.AddSeasonDate(seasonDate);
+            seasonProgramming();
+        }
+
+        public ActionResult FacilityManagement()
         {
             _loginController.checkRoleLvl(500);
 
             return View("FacilityManagement");
+        }
+
+        [HttpGet]
+        public ActionResult FacilityView()
+        {
+            IEnumerable<Facility> facilities = _facilityRepository.Facilities;
+
+            List<Facility> facilityList = new List<Facility>();
+            foreach(var p in facilities)
+            {
+                facilityList.Add(p);
+            }
+
+            BeheerViewModel model = new BeheerViewModel
+            {
+                facilityList = facilityList
+            };
+            return View("FacilityView", model);
+        }
+
+        [HttpGet]
+        public ActionResult UpdateFacility(Facility facility)
+        {
+
+            BeheerViewModel model = new BeheerViewModel
+            {
+                facility = facility
+            };
+            return View("UpdateFacility", model);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateFacilityPost(Facility facility)
+        {
+            _facilityRepository.UpdateFacility(facility);
+            return RedirectToAction("FacilityView");
+        }
+
+        [HttpGet]
+        public ActionResult RemoveFacility(Facility facility)
+        {
+            _facilityRepository.RemoveFacility(facility);
+            return RedirectToAction("FacilityView");
+        }
+
+        [HttpGet]
+        public ActionResult AddNewFacility()
+        {
+            return View("AddNewFacility");
+        }
+
+        [HttpPost]
+        public ActionResult AddNewFacilityPost(Facility facility)
+        {
+            _facilityRepository.AddNewFacility(facility);
+            return RedirectToAction("FacilityView");
         }
 
     }

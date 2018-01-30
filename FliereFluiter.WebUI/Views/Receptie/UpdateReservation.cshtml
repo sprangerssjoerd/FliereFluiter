@@ -1,0 +1,28 @@
+﻿@model FliereFluiter.WebUI.Models.ReceptieViewModel
+@{
+    ViewBag.Title = "UpdateReservation";
+}
+
+<h2>UpdateReservation</h2>
+
+@using (Html.BeginForm("UpdateReservationPost", "Receptie", new { }, FormMethod.Post, new { @class = "form_html" }))
+{
+    foreach (var p in Model.placeReservation.PlaceReservationCampingPlaces)
+    {
+
+
+        @:vul hier uw gewenste aankomst datum
+        @Html.EditorFor(model => p.PeriodBegin, "beginDate", new { @Value = p.PeriodBegin });
+
+
+        @:vul hier uw gewenste vertrek datum
+        @Html.EditorFor(model => p.PeriodEnd, "endDate", new { @Value = p.PeriodEnd});
+
+
+        @:Vul hier in het gewenste veld in
+        @Html.EditorFor(x => Model.campingPlaceList, "CampingPlace", new { @Value = p.CampingPlace });
+        
+
+        <input type="submit" value="Beschikbaarheid opvragen" />
+    }
+}

@@ -14,5 +14,7 @@ namespace FliereFluiter.WebUI.Models
         public IEnumerable<PlaceReservation> placeReservations { get; set; }
         public PlaceReservation placeReservation { get; set; }
         public IEnumerable<Invoice> invoices { get; set; }
+        public Guest guest { get; set; }
+        public List<CampingPlace> campingPlaceList { get; set; }
     }
 }

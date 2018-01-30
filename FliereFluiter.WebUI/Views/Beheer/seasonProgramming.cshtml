@@ -4,7 +4,13 @@
 }
 
 <h2>seasonProgramming</h2>
+
+@Html.ActionLink("Voeg nieuw seizoen toe", "AddNewSeason", "Beheer")<br /><br />
+
+
 Alle seasoninfo: <br />
+
+
 
 @foreach (var p in Model.seasonInfoList)
 {

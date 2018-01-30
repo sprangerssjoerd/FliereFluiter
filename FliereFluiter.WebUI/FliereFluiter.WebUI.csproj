@@ -227,6 +227,12 @@
     <Content Include="Views\Beheer\BeheerStart.cshtml" />
     <Content Include="Views\Beheer\seasonProgramming.cshtml" />
     <Content Include="Views\Beheer\ChangeSeason.cshtml" />
+    <Content Include="Views\Beheer\addNewSeason.cshtml" />
+    <Content Include="Views\Beheer\facilityManagement.cshtml" />
+    <Content Include="Views\Beheer\FacilityView.cshtml" />
+    <Content Include="Views\Beheer\UpdateFacility.cshtml" />
+    <Content Include="Views\Beheer\AddNewFacility.cshtml" />
+    <Content Include="Views\Receptie\UpdateReservation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

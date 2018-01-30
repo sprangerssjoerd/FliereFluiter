@@ -1,0 +1,15 @@
+﻿@model FliereFluiter.WebUI.Models.BeheerViewModel
+@{
+    ViewBag.Title = "addNewSeason";
+}
+
+<h2>addNewSeason</h2>
+
+@using (Html.BeginForm("AddNewSeasonPost", "Beheer", new { }, FormMethod.Post, new { @class = "form_html" }))
+{
+    @:Naam: @Html.TextBoxFor(m => m.seasonInfo.name, "name")<br />
+    @:Begindatum: @Html.EditorFor(m => m.seasonInfo.beginDate, "beginDate")<br />
+    @:eindDatum: @Html.EditorFor(m => m.seasonInfo.endDate, "endDate")<br />
+    @:prijs: @Html.EditorFor(m => m.seasonInfo.price, "price")<br />
+    <input type="submit" value="voeg nieuwe season toe" />
+}
