@@ -16,5 +16,18 @@ namespace FliereFluiter.WebUI.Models
         public IEnumerable<Invoice> invoices { get; set; }
         public Guest guest { get; set; }
         public List<CampingPlace> campingPlaceList { get; set; }
+        public CampingPlace campingPlace { get; set; }
+        public PlaceReservationCampingPlace prcp { get; set; }
+        public List<PlaceReservationCampingPlace> prcpList { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime PeriodBegin { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime PeriodEnd { get; set; }
+
     }
 }

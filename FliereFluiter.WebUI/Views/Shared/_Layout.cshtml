@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="`/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/Site.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -27,23 +27,23 @@
         }
         else
         {
-            @:Hallo @HttpContext.Current.Session["UserName"].ToString()
-            @Html.ActionLink("log uit", "Logout", "login");
+            @:Hallo @HttpContext.Current.Session["UserName"].ToString()<br />
+            @Html.ActionLink("log uit", "Logout", "login");<br />
 
             if ((int)HttpContext.Current.Session["RoleLvl"] >= 800)
             {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")
-                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")
-                @Html.ActionLink("ManagerStart", "ManagerStart", "Manager")
+                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie") @: 
+                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")@: 
+                @Html.ActionLink("ManagerStart", "ManagerStart", "Manager")@: 
             }
             else if ((int)HttpContext.Current.Session["RoleLvl"] >= 500)
             {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")
-                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")
+                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")@: 
+                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")@: 
             }
             else  if ((int)HttpContext.Current.Session["RoleLvl"] >= 200)
             {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart","Receptie")
+                @Html.ActionLink("ReceptieStart", "ReceptieStart","Receptie")@: 
             }
 
 

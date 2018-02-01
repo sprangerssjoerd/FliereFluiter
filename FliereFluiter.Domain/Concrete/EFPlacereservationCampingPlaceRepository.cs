@@ -57,5 +57,24 @@ namespace FliereFluiter.Domain.Concrete
             return PRCPList;
         }
 
+        public void UpdatePRCP(PlaceReservationCampingPlace prcp)
+        {
+            PlaceReservationCampingPlace result = context.PlaceReservationCampingPlaces.Single(x => x.PlaceReservationId.Equals(prcp.PlaceReservationId));
+            if (result != null)
+            {
+                result.CampingPlaceId = prcp.CampingPlaceId;
+                result.PeriodBegin = prcp.PeriodBegin;
+                result.PeriodEnd = prcp.PeriodEnd;
+            }
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (SqlException sqlex)
+            {
+                throw new Exception("prcp is not saved", sqlex);
+            }
+        }
+
     }
 }

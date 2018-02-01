@@ -7,22 +7,29 @@
 
 @using (Html.BeginForm("UpdateReservationPost", "Receptie", new { }, FormMethod.Post, new { @class = "form_html" }))
 {
-    foreach (var p in Model.placeReservation.PlaceReservationCampingPlaces)
+    
+    for (int i = 0; i < Model.prcpList.Count(); i++)
     {
 
-
-        @:vul hier uw gewenste aankomst datum
-        @Html.EditorFor(model => p.PeriodBegin, "beginDate", new { @Value = p.PeriodBegin });
-
-
-        @:vul hier uw gewenste vertrek datum
-        @Html.EditorFor(model => p.PeriodEnd, "endDate", new { @Value = p.PeriodEnd});
+        @Html.HiddenFor(m => Model.prcpList[i].PlaceReservationId, new { PlaceReservationId = Model.prcpList[i].PlaceReservationId}) 
+        @:vul hier uw gewenste aankomst datum<br />
 
 
-        @:Vul hier in het gewenste veld in
-        @Html.EditorFor(x => Model.campingPlaceList, "CampingPlace", new { @Value = p.CampingPlace });
-        
+        @Html.EditorFor(m => Model.prcpList[i].PeriodBegin, "PeriodBegin", new { @Value = Model.prcpList[i].PeriodBegin })
+        @:<br /><br />
 
-        <input type="submit" value="Beschikbaarheid opvragen" />
+
+        @:vul hier uw gewenste vertrek datum<br />
+        @Html.EditorFor(m => Model.prcpList[i].PeriodEnd, "PeriodEnd", new { @Value = Model.prcpList[i].PeriodEnd })
+
+        @:<br /><br />
+
+
+        @:Vul hier in het gewenste plaats in<br />
+        @Html.DropDownListFor(m => m.prcpList[i].CampingPlaceId, new SelectList(Model.campingPlaceList, "CampingPlaceId", "Name", Model.prcpList[i].CampingPlaceId, null ));
+        @:<br /><br />
+
+
     }
+    <input type="submit" value="voer wijziging door" />
 }

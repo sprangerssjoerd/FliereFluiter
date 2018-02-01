@@ -20,7 +20,11 @@ namespace FliereFluiter.Domain.Entities
         public PlaceReservation PlaceReservation { get; set; }
         public CampingPlace CampingPlace { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PeriodBegin { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PeriodEnd { get; set; }
     }
 }

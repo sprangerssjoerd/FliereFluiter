@@ -13,6 +13,7 @@ namespace FliereFluiter.Domain.Abstract
         IEnumerable<CampingField> CampingFields { get; }
 
         CampingField getCampingFieldById(int campingFieldId);
+        bool isDateAfterBegindate(DateTime beginDateToCheck, DateTime endDateToCheck);
         ArrayList isDateInBetween(DateTime beginDateToCheck, DateTime endDateToCheck, int campingfieldId);
     }
 

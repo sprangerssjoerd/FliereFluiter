@@ -26,7 +26,8 @@ namespace FliereFluiter.WebUI.Controllers
         private IPlaceReservationCampingPlaceRepository _placeReservationCampingPlaceRepository;
         private ISeasonRepository _seasonRepository;
         private ICampingPlaceRepository _campingPlaceRepository;
-        public ReceptieController(IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository, ISeasonDateRepository seasonDateRepository, IPlaceReservationCampingPlaceRepository placeReservationCampingPlaceRepository, ISeasonRepository seasonRepository, PdfCreator pdfCreator, ICampingPlaceRepository campingPlaceRepository)
+        private ICampingFieldRepository _campingFieldRepository;
+        public ReceptieController(ICampingFieldRepository campingFieldRepositoy, IPlaceReservationRepository placeReservationRepository, IGuestRepository guestRepository, LoginController loginController, IInvoiceRepository inVoiceRepository, ISeasonDateRepository seasonDateRepository, IPlaceReservationCampingPlaceRepository placeReservationCampingPlaceRepository, ISeasonRepository seasonRepository, PdfCreator pdfCreator, ICampingPlaceRepository campingPlaceRepository)
         {
             _placeReservationRepository = placeReservationRepository;
             _guestRepository = guestRepository;
@@ -37,6 +38,7 @@ namespace FliereFluiter.WebUI.Controllers
             _seasonRepository = seasonRepository;
             _pdfCreator = pdfCreator;
             _campingPlaceRepository = campingPlaceRepository;
+            _campingFieldRepository = campingFieldRepositoy;
         }
 
         [HttpGet]
@@ -204,18 +206,68 @@ namespace FliereFluiter.WebUI.Controllers
                 campingPlaceList.Add(campingplace);
             }
 
+            List<PlaceReservationCampingPlace> prcpList = pr.PlaceReservationCampingPlaces.ToList();
 
             ReceptieViewModel model = new ReceptieViewModel
             {
-                placeReservation = pr,
+                prcpList = prcpList,
                 campingPlaceList = campingPlaceList
             };
-            return View();
+            return View("UpdateReservation", model);
         }
 
-        public void UpdateReservationPost(PlaceReservation pr)
+        public ActionResult UpdateReservationPost(List<PlaceReservationCampingPlace> prcpList)
         {
+            foreach (var prcp in prcpList)
+            {
+                DateTime begin = prcp.PeriodBegin;
+                DateTime end = prcp.PeriodEnd;
+                //PlaceReservationCampingPlace prcp = new PlaceReservationCampingPlace()
+                //{
+                //    CampingPlaceId = CampingPlaceId,
+                //    PlaceReservationId = PlaceReservationId,
+                //    PeriodBegin = PeriodBegin,
+                //    PeriodEnd = PeriodEnd
+                //};
+                if (_campingFieldRepository.isDateAfterBegindate(begin, end) != true)
+                {
+                    throw new Exception("einddatum is voor begindatum");
+                }
 
+                var reservations = _placeReservationCampingPlaceRepository.getPRCPByCampingPlaceId(prcp.CampingPlaceId);
+                List<PlaceReservationCampingPlace> result = new List<PlaceReservationCampingPlace>();
+                foreach (var p in reservations)
+                {
+                    if (p.PlaceReservationId != prcp.PlaceReservationId)
+                    {
+                        result.Add(p);
+                    }
+
+                }
+                bool IsTaken = false;
+                foreach (var r in result)
+                {
+
+                    //checking if the begin date is between an already existing reservation
+                    if ((begin.Ticks > r.PeriodBegin.Ticks && end.Ticks < r.PeriodEnd.Ticks)
+                        || (end.Ticks > r.PeriodBegin.Ticks && end.Ticks < r.PeriodEnd.Ticks)
+                        || (begin.Ticks < r.PeriodBegin.Ticks && begin.Ticks > r.PeriodEnd.Ticks))
+                    {
+                        IsTaken = true;
+                    }
+                }
+
+                if (IsTaken)
+                {
+                    throw new Exception("Plaats is bezet is gekozen tijds periode");
+                }
+                else
+                {
+                    _placeReservationCampingPlaceRepository.UpdatePRCP(prcp);
+                }
+            }
+
+            return RedirectToAction("viewReservations");
         }
     }
 }
