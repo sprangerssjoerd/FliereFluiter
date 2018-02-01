@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="navbar">
-        <a class="navbar-brand" href="#"> FLIEREFLUITER</a>
+
 
         <form id="form1" runat="server">
             <asp:Login ID="Login1" runat="server" OnAuthenticate="ValidateUser"></asp:Login>
@@ -23,7 +23,32 @@
     <div>
         @if (HttpContext.Current.Session["UserId"] == null)
         {
-           @Html.ActionLink("Log in", "Login", "Login");
+            <div class="home-menu">
+                <div class="home-menu-content" id="home-menu-content-loginbutton">
+                    @Html.ActionLink("LOG IN", "Login", "Login")
+                </div>
+                <div class="home-menu-content" id="home-menu-content-facilitybutton">
+                    @Html.ActionLink("FACILITEITEN", "Login", "Home")
+                </div>
+                <div class="home-menu-content" id="home-menu-content-homebutton">
+                    <img src="..\Content\Img\Home\Logoflierefluiterwhite.png" alt="logoFliereFluiter" id="homelogo"/>
+                    @Html.ActionLink("FLIEREFLUITER", "Login", "Home")
+                </div>
+                <div class="home-menu-content" id="home-menu-content-reservationbutton">
+                    @Html.ActionLink("RESERVEREN", "Reservation", "Guest")
+                </div>
+                <div class="home-menu-content" id="home-menu-content-contactbutton">
+                    @Html.ActionLink("CONTACT", "contact", "Home")
+                </div>
+            </div>
+                <div class="home-content-header">
+                    <div class="row">
+                        <div class="home-content-header-title">
+                            dit is een oefen tekst
+                        </div>
+                    </div>
+            </div>
+
         }
         else
         {
@@ -32,18 +57,18 @@
 
             if ((int)HttpContext.Current.Session["RoleLvl"] >= 800)
             {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie") @: 
-                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")@: 
-                @Html.ActionLink("ManagerStart", "ManagerStart", "Manager")@: 
+                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie") @:
+                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")@:
+                @Html.ActionLink("ManagerStart", "ManagerStart", "Manager")@:
             }
             else if ((int)HttpContext.Current.Session["RoleLvl"] >= 500)
             {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")@: 
-                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")@: 
+                @Html.ActionLink("ReceptieStart", "ReceptieStart", "Receptie")@:
+                @Html.ActionLink("BeheerStart", "BeheerStart", "Beheer")@:
             }
             else  if ((int)HttpContext.Current.Session["RoleLvl"] >= 200)
             {
-                @Html.ActionLink("ReceptieStart", "ReceptieStart","Receptie")@: 
+                @Html.ActionLink("ReceptieStart", "ReceptieStart","Receptie")@:
             }
 
 

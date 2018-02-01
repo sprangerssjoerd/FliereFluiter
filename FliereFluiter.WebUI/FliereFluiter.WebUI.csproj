@@ -157,11 +157,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Img\Home\Logoflierefluiterwhite.png" />
+    <Content Include="Content\Img\Home\tourist-camp-with-tents-PP5Q6WX.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Grocery-Bursh\Grocery-Brush.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\Grocery-Bursh\Grocery-Brush.eot" />
+    <Content Include="fonts\Grocery-Bursh\Grocery-Brush.ttf" />
+    <Content Include="fonts\Grocery-Bursh\Grocery-Brush.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

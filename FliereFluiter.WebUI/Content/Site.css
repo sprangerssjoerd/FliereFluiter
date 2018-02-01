@@ -1,13 +1,111 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-color: purple;
+﻿/*                                                             .---.
+                                                              /  .  \
+                                                             |\_/|   |
+                                                             |   |  /|
+  .----------------------------------------------------------------' |
+ /  .-.                                                              |
+|  /   \   Site.css for project FliereFluiter                        |
+| |\_.  |                                                            |
+|\|  | /|  Project belongs to Sjoerd Sprangers                       |
+| `---' |                                                            |
+|       |  Project FliereFluiter Avans IVH7                          | 
+|       |                                                           /
+|       |----------------------------------------------------------'
+\       |
+ \     /
+  `---'*/
+/*
+  .-----------------------------------------------------------------.
+ /  .-.                                                         .-.  \
+|  /   \                                                       /   \  |
+| |\_.  |           CUSTOM FONDS                              |    /| |
+|\|  | /|                                                     |\  | |/|
+| `---' |                                                     | `---' |
+|       |                                                     |       | *
+|       |-----------------------------------------------------|       |
+\       |                                                     |       /
+ \     /                                                       \     /
+  `---'                                                         `---'
+*/
+/*
+  .-----------------------------------------------------------------.
+ /  .-.                                                         .-.  \
+|  /   \                                                       /   \  |
+| |\_.  |           CSS RESET                                 |    /| |
+|\|  | /|                                                     |\  | |/|
+| `---' |                                                     | `---' |
+|       |                                                     |       |
+|       |-----------------------------------------------------|       |
+\       |                                                     |       /
+ \     /                                                       \     /
+  `---'                                                         `---'
+    */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/*
+  .-----------------------------------------------------------------.
+ /  .-.                                                         .-.  \
+|  /   \                                                       /   \  |
+| |\_.  |           CONTENT                                   |    /| |
+|\|  | /|                                                     |\  | |/|
+| `---' |                                                     | `---' |
+|       |                                                     |       |
+|       |-----------------------------------------------------|       |
+\       |                                                     |       /
+ \     /                                                       \     /
+  `---'                                                         `---'
+    */
+
+body {
+    background-color: black;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -17,3 +115,57 @@ textarea {
     max-width: 280px;
 }
 
+a:link, a:visited, a:hover, a:active{
+    text-decoration:none;
+    color: #ffffff;
+}
+
+.home-menu{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    z-index:10;
+    position:absolute;
+    width:100vw;
+    height:auto;
+    margin-top: 1vh;
+}
+
+.home-menu-content{
+    font-family: 'Grocery Brush';
+}
+
+#home-menu-content-loginbutton,#home-menu-content-contactbutton,#home-menu-content-facilitybutton,#home-menu-content-reservationbutton{
+    font-size: 2em;
+    margin: 5%;
+    width:15%;
+}
+
+#home-menu-content-homebutton{
+    font-size: 4em;
+    display:flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items:center
+}
+
+#homelogo{
+    width: 50%;
+}
+
+.home-content-header{
+    background-image:url("/Content/Img/Home/tourist-camp-with-tents-PP5Q6WX.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    z-index: 0;
+    position:relative;
+}
+
+.row{
+    background: rgba(30,55,10,0.60);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
+}
