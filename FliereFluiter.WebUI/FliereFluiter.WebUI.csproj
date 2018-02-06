@@ -157,7 +157,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Img\Home\innercloud.png" />
+    <Content Include="Content\Img\Home\innertrans.png" />
     <Content Include="Content\Img\Home\Logoflierefluiterwhite.png" />
+    <Content Include="Content\Img\Home\Reservationheadercloud.png" />
     <Content Include="Content\Img\Home\tourist-camp-with-tents-PP5Q6WX.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
