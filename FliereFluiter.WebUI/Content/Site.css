@@ -188,7 +188,7 @@ a:link, a:visited, a:hover, a:active{
     background-repeat: no-repeat;
     background-position:center;
     background-size:80%;
-    margin-top:15%;
+    /*margin-top:15%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -235,6 +235,79 @@ a:link, a:visited, a:hover, a:active{
     font-size: 4em;
     color: white;
 }
+.divider-content1{
+    display: flex;
+    height: 100vh;
+    margin-top: -14%;
+    flex-direction: column;
+}
+
+.divider-content1-topbar{
+    background-image: url(/Content/Img/Home/Dividercontent1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 0;
+    padding-top: 25.84%;
+    z-index: 2;
+}
+
+.divider-content1-center{
+    background-color: white;
+}
+
+.divider-content1-center-title{
+    font-family: "Grocery Brush";
+    font-size: 5em;
+    color: black;
+    text-align: center;
+    margin-bottom:5%;
+}
+
+.divider-content1-center-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.divider-content1-center-innercontainer{
+    width:30vh;
+    height:30vh;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    font-family: "Grocery Brush";
+    font-size: 2.2em;
+    color: white;
+    box-shadow: 7px 7px 10px 0px #888888;
+    transition: all 0.5s ease;
+    padding-top: 0.5%;
+    padding-left: 0.5%;
+    text-shadow: 1px 1px #f1592a;
+}
+
+.divider-content1-center-innercontainer:hover {
+    width: 35vh;
+    height: 35vh;
+    box-shadow: 20px 20px 20px 5px #888888;
+    font-size: 2.5em;
+}
+
+.divider-content1-center-leftcontainer{
+    background-image: url(/Content/Img/Home/standaard.jpg);
+}
+
+.divider-content1-center-centercontainer{
+    background-image: url(/Content/Img/Home/trekker.jpg);
+}
+
+.divider-content1-center-rightcontainer{
+    background-image: url(/Content/Img/Home/comfort.jpg);
+}
+
+.divider-content1-botbar{
+
+}
 
 /*
   .-----------------------------------------------------------------.
@@ -248,7 +321,7 @@ a:link, a:visited, a:hover, a:active{
 \       |                                                     |       /
  \     /                                                       \     /
   `---'                                                         `---'
-    */
+    
 
 .backend,.backend a:link,.backend a:link,.backend a:visited,.backend a:hover,.backend a:active{
     color:black;
