@@ -79,7 +79,7 @@ namespace FliereFluiter.WebUI.Controllers
             {
                 seasonInfoList = seasonInfoList
             };
-
+			
             return View("SeasonProgramming", model);
         }
 
@@ -146,8 +146,8 @@ namespace FliereFluiter.WebUI.Controllers
             Season season = new Season
             {
                 Name = name,
-                Price = price
-            };
+                Price = price,
+			};
 
             Season result = _seasonRepository.AddSeason(season);
 

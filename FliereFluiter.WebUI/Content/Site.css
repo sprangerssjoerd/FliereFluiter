@@ -254,6 +254,7 @@ a:link, a:visited, a:hover, a:active{
 
 .divider-content1-center{
     background-color: white;
+    padding-bottom: 5vh;
 }
 
 .divider-content1-center-title{
@@ -306,8 +307,29 @@ a:link, a:visited, a:hover, a:active{
 }
 
 .divider-content1-botbar{
-
+    height: 5vh;
+    width: auto;
 }
+
+.content-contact{
+    display:flex;
+    align-content:center;
+    align-items: center;
+    margin: 5vh;
+    flex-direction:column;
+    
+        
+}
+
+.googlemaps{
+    margin: 1vh;
+}
+
+body{
+    background-color: darkslategrey;
+    color: white;
+}
+
 
 /*
   .-----------------------------------------------------------------.
@@ -326,3 +348,4 @@ a:link, a:visited, a:hover, a:active{
 .backend,.backend a:link,.backend a:link,.backend a:visited,.backend a:hover,.backend a:active{
     color:black;
 }
+    */

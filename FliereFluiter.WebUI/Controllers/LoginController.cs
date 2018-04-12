@@ -26,6 +26,11 @@ namespace FliereFluiter.WebUI.Controllers
         {
             _loginRepository = loginRepository;
         }
+
+		public LoginController()
+		{
+
+		}
         [HttpGet]
         public ViewResult Login()
         {

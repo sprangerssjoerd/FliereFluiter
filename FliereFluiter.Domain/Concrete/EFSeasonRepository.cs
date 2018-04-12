@@ -11,6 +11,7 @@ namespace FliereFluiter.Domain.Concrete
 {
     public class EFSeasonRepository : ISeasonRepository
     {
+
         private EFDbContext context = new EFDbContext();
 
         public IEnumerable<Season> Seasons
@@ -69,10 +70,11 @@ namespace FliereFluiter.Domain.Concrete
             try
             {
                 context.SaveChanges();
-            }
+			}
             catch (SqlException sqlex)
             {
                 throw new Exception("season is not saved", sqlex);
+				
             }
             return season;
         }

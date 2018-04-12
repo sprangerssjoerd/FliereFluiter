@@ -21,7 +21,9 @@ namespace FliereFluiter.WebUI.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime endDate { get; set; }
 
-        public List<Facility> facilityList { get; set; }
+		public double price { get; set; }
+
+		public List<Facility> facilityList { get; set; }
         public Facility facility { get; set; }
     }
 }
