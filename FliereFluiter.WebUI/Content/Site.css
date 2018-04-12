@@ -316,13 +316,15 @@ a:link, a:visited, a:hover, a:active{
     align-content:center;
     align-items: center;
     margin: 5vh;
-    flex-direction:column;
-    
-        
+    flex-direction:column;        
 }
 
 .googlemaps{
     margin: 1vh;
+}
+
+.divider-content1-center-f{
+
 }
 
 body{
